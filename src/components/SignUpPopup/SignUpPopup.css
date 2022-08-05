@@ -1,0 +1,65 @@
+.popup__input {
+  margin: 0 0 31px 0;
+  padding: 0 0 10px 0;
+  width: 358px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.popup__input::placeholder {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.2);
+}
+.popup__error {
+  padding: 0;
+  margin: -28px 0 10px 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  opacity: 0;
+  transition: 0.3s;
+}
+.popup__error_visible {
+  opacity: 1;
+}
+.popup__input-label {
+  padding-bottom: 9px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #2f71e5;
+}
+@media screen and (max-width: 430px) {
+  .popup__container {
+    width: 95vw;
+  }
+  .popup__button {
+    width: 95vw;
+  }
+  .popup__input {
+    width: calc(90vw - (32px / 2));
+  }
+  .button_type_close {
+    border: none;
+    position: absolute;
+    top: -21px;
+    right: 40px;
+  }
+  .popup__form {
+    width: 100%;
+  }
+}
