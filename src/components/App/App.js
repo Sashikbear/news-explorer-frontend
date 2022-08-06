@@ -76,56 +76,54 @@ function App() {
   }, [isSignInPopupOpen, isSignUpPopupOpen]);
   return (
     <div className='page'>
-      <div className='wrapper'>
-        <CurrentUserContext.Provider value={currentUser}>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <Main
-                  onSignInClick={handleSignInClick}
-                  onClose={closeAllPopups}
-                  isFullCardList={isFullCardList}
-                  onViewSearched={handleHalfCardList}
-                  onSignOut={handelSignOutSubmit}
-                />
-              }
-            />
-            <Route
-              path='saved-news'
-              element={
-                <SavedNews
-                  isFullCardList={isFullCardList}
-                  onViewSearched={handleFullCardList}
-                  onSignOut={handelSignOutSubmit}
-                />
-              }
-            />
-          </Routes>
-          <SignInPopup
-            isOpen={isSignInPopupOpen}
-            onSignUpClick={handleSignUpClick}
-            onClose={closeAllPopups}
-            alternative='Sign up'
-            submitButton='Sign in'
-            onSignInSubmit={handelSignInSubmit}
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Main
+                onSignInClick={handleSignInClick}
+                onClose={closeAllPopups}
+                isFullCardList={isFullCardList}
+                onViewSearched={handleHalfCardList}
+                onSignOut={handelSignOutSubmit}
+              />
+            }
           />
-          <SignUpPopup
-            isOpen={isSignUpPopupOpen}
-            onClose={closeAllPopups}
-            alternative='Sign in'
-            submitButton='Sign up'
-            onSignInClick={handleSignInClick}
-            onSignUpSubmit={handelSignUpSubmit}
+          <Route
+            path='saved-news'
+            element={
+              <SavedNews
+                isFullCardList={isFullCardList}
+                onViewSearched={handleFullCardList}
+                onSignOut={handelSignOutSubmit}
+              />
+            }
           />
-          <PopupConfirm
-            isOpen={isConfirmPopupOpen}
-            onClose={closeAllPopups}
-            onSignInClick={handleSignInClick}
-            title='Registration successfully completed!'
-          />
-        </CurrentUserContext.Provider>
-      </div>
+        </Routes>
+        <SignInPopup
+          isOpen={isSignInPopupOpen}
+          onSignUpClick={handleSignUpClick}
+          onClose={closeAllPopups}
+          alternative='Sign up'
+          submitButton='Sign in'
+          onSignInSubmit={handelSignInSubmit}
+        />
+        <SignUpPopup
+          isOpen={isSignUpPopupOpen}
+          onClose={closeAllPopups}
+          alternative='Sign in'
+          submitButton='Sign up'
+          onSignInClick={handleSignInClick}
+          onSignUpSubmit={handelSignUpSubmit}
+        />
+        <PopupConfirm
+          isOpen={isConfirmPopupOpen}
+          onClose={closeAllPopups}
+          onSignInClick={handleSignInClick}
+          title='Registration successfully completed!'
+        />
+      </CurrentUserContext.Provider>
     </div>
   );
 }

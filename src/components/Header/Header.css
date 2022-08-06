@@ -3,7 +3,7 @@
 }
 .header__title {
   max-width: 608px;
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto-slab', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 60px;
@@ -36,8 +36,11 @@
 @media screen and (max-width: 635px) {
   .header__title {
     width: 100%;
+    padding: 0 0 16px 0;
+    margin-top: 54px;
   }
   .header__subtitle {
     width: 100%;
+    padding: 0 0 122px 0;
   }
 }

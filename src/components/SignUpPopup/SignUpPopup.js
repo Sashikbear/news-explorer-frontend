@@ -29,6 +29,7 @@ function SignUpPopup({
     errors.email = '';
     values.password = '';
     errors.password = '';
+    // eslint-disable-next-line
   }, [isOpen]);
 
   return (
@@ -106,7 +107,7 @@ function SignUpPopup({
       <div className='popup__alternative-wrapper'>
         <span className='popup__alternative'>or </span>
         <span
-          className='popup__alternative popup__alternative_link'
+          className='popup__alternative popup__alternative_type_link'
           onClick={onSignInClick}
         >
           {alternative}

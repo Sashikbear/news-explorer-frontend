@@ -63,23 +63,24 @@
   align-self: flex-end;
   background: url('../../images/close.svg') no-repeat center;
 }
-@media screen and (max-width: 430px) {
-  .popup__input {
-    max-width: calc(100% -32px / 2);
-  }
+@media screen and (max-width: 530px) {
   .popup__container {
-    width: 95vw;
-  }
-  .popup__input {
-    width: calc(90vw -32px / 2);
+    width: 100%;
   }
   .popup__button {
-    width: calc(100% -32px / 2);
+    width: 100%;
   }
   .button_type_close {
     border: none;
     position: absolute;
-    top: -61px;
-    right: 40px;
+    top: -51px;
+    right: 25px;
+  }
+  .popup__container {
+    position: relative;
+    align-self: flex-start;
+    height: 100vh;
+    margin: 56px 0 0 0;
+    width: 90%;
   }
 }

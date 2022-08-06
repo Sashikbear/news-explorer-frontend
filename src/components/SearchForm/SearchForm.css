@@ -8,6 +8,12 @@
   border: 1px solid #d1d2d6;
   backdrop-filter: blur(8px);
   border-radius: 100px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.38;
+  color: #1a1b22;
 }
 .search-form__input::placeholder {
   font-family: 'Roboto', sans-serif;
@@ -15,7 +21,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.38;
-  color: #1a1b22;
+  color: #b6bcbf;
 }
 .search-form__button {
   color: #ffffff;

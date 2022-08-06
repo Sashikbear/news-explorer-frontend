@@ -43,7 +43,32 @@
   line-height: 15px;
   color: #2f71e5;
 }
-@media screen and (max-width: 430px) {
+.popup__alternative-wrapper {
+  display: flex;
+  align-self: center;
+}
+.popup__alternative {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+}
+.popup__alternative_type_link {
+  margin-left: 5px;
+  color: #2f71e5;
+  cursor: pointer;
+}
+.popup__alternative_type_link:hover {
+  color: #347eff;
+  border-bottom: 1px solid #347eff;
+}
+.popup__alternative_type_link:active {
+  color: #2a65cc;
+}
+@media screen and (max-width: 530px) {
   .popup__container {
     width: 95vw;
   }

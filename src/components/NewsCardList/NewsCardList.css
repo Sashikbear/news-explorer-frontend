@@ -44,7 +44,7 @@
 }
 
 .news-card-list__title {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto-slab', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -88,7 +88,7 @@
     margin: 0 0 58px 0;
   }
   .news-card-list__grid {
-    max-width: calc(100% - (32px / 2));
+    max-width: 100%;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -99,9 +99,10 @@
     grid-gap: 10px;
   }
   .news-card__button-wrapper {
-    width: calc(100% - (32px / 2));
+    width: 100%;
   }
   .news-card__button {
     width: 100%;
+    padding: 16px 98px;
   }
 }

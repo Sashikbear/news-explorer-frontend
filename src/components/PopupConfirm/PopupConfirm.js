@@ -1,5 +1,4 @@
 import './PopupConfirm.css';
-import { useState, useEffect } from 'react';
 function PopupConfirm({ name, isOpen, title, onSignInClick, onClose }) {
   return (
     <section className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}>

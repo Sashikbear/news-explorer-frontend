@@ -10,8 +10,11 @@
   justify-content: space-between;
   border-bottom: 1px solid rgba(196, 196, 196, 0.1);
 }
+.navbar__wrapper_color_grey {
+  border-bottom: 1px solid rgba(8, 29, 45, 0.3);
+}
 .navbar__logo {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto-slab', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -37,7 +40,10 @@
   font-size: 18px;
   line-height: 1.33;
   color: #ffffff;
-  margin-left: 78px;
+  margin-left: 42px;
+}
+.navbar__link_type_saved {
+  padding: 0 17px;
 }
 .navbar__link_color_black {
   color: #1a1b22;
@@ -62,7 +68,7 @@
   background: none;
   border: 1px solid #ffffff;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: default;
   padding: 12px;
   margin: -12px 0 0 0;
 }
@@ -73,12 +79,7 @@
 .navbar__button_signedin {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   min-width: 100px;
-  background: none;
-  margin: -12px 0 0 0;
-  padding: 12px;
-  border-radius: 100px;
 }
 .navbar__icon {
   width: 17.41px;
@@ -91,6 +92,7 @@
 }
 .navbar__button_signedin-white {
   border: 1px solid #ffffff;
+  color: #ffffff;
 }
 .navbar__icon_color_black {
   background-image: url('../../images/logout-black.svg');
@@ -111,14 +113,19 @@
   }
   .navbar__link {
     padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 16px;
   }
   .navbar__button_signedin {
     margin-top: -8px;
     padding: 8px;
+    max-width: 100px;
   }
   .navbar__button {
     margin-top: -8px;
     padding: 8px;
+    max-width: 152px;
   }
   .navbar__wrapper {
     padding: 14px 40px 0 40px;
@@ -200,5 +207,12 @@
   .navbar__logo {
     font-size: 16px;
     line-height: 1.5;
+  }
+  .navbar__button {
+    max-width: 100%;
+    padding: 0;
+  }
+  .navbar {
+    position: absolute;
   }
 }

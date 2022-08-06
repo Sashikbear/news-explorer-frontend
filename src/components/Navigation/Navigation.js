@@ -19,7 +19,11 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
         {isHamburgerMenuClicked && islocationMain && (
           <div className='navbar__overlay'></div>
         )}
-        <div className='navbar__wrapper'>
+        <div
+          className={`navbar__wrapper  ${
+            islocationMain ? '' : 'navbar__wrapper_color_grey'
+          }`}
+        >
           <div
             className={`navbar__logo  ${
               islocationMain ? '' : 'navbar__logo_color_black'
@@ -86,7 +90,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
             {currentUser.isLoggedIn && (
               <>
                 <li
-                  className={`navbar__link  ${
+                  className={`navbar__link navbar__link_type_saved  ${
                     islocationMain ? '' : 'navbar__link_color_black'
                   }`}
                 >
@@ -112,8 +116,8 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                     islocationMain ? '' : 'navbar__link_color_black'
                   }`}
                 >
-                  <div
-                    className={`navbar__button_signedin  ${
+                  <button
+                    className={`navbar__button navbar__button_signedin  ${
                       islocationMain
                         ? 'navbar__button_signedin-white'
                         : 'navbar__button_color_black'
@@ -128,7 +132,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                           : 'navbar__icon_color_black'
                       }`}
                     ></div>
-                  </div>
+                  </button>
                 </li>
                 <li>
                   <div
@@ -220,8 +224,8 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                     islocationMain ? '' : 'navbar__link-hamburger_color_black'
                   }`}
                 >
-                  <div
-                    className={`navbar__button_signedin  ${
+                  <button
+                    className={`navbar__button navbar__button_signedin  ${
                       islocationMain
                         ? 'navbar__button_signedin-white'
                         : 'navbar__button_color_black'
@@ -236,7 +240,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                           : 'navbar__icon_color_black'
                       }`}
                     ></div>
-                  </div>
+                  </button>
                 </li>
               </>
             )}

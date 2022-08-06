@@ -1,17 +1,5 @@
 import './PopupWithForm.css';
-import { useState, useEffect } from 'react';
-function PopupWithForm({
-  name,
-  isOpen,
-  title,
-  alternative,
-  onClose,
-  submitButton,
-  onSubmit,
-  isButtonEnabled,
-  onSignUpClick,
-  children,
-}) {
+function PopupWithForm({ name, isOpen, title, onClose, onSubmit, children }) {
   return (
     <section className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}>
       <div className='popup__container'>

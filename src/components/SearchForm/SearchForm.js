@@ -12,7 +12,7 @@ function SearchForm({ onSearchSubmit }) {
         type='search'
         id='search'
         name='search'
-        placeholder='Type to search'
+        placeholder='Enter topic'
       ></input>
       <button className='search-form__button' onClick={handleSubmit}>
         Search

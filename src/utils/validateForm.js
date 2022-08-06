@@ -3,6 +3,7 @@ export function validateLoginInfo(values) {
 
   if (!values.email) {
     errors.email = 'Email address is required. Please fill in this field.';
+    // eslint-disable-next-line
   } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(values.email)) {
     errors.email = 'The email address has an invalid format.';
   } else if (!values.password) {
@@ -19,6 +20,7 @@ export function validateSignUpInfo(values) {
 
   if (!values.email) {
     errors.email = 'Email address is required. Please fill in this field.';
+    // eslint-disable-next-line
   } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(values.email)) {
     errors.email = 'The email address has an invalid format.';
   } else if (!values.password) {

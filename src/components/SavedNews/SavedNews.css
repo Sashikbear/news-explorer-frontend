@@ -1,5 +1,8 @@
 .saved-news__wrapper {
   background-color: #ffffff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .saved-news {

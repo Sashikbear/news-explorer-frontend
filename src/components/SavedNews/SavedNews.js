@@ -1,19 +1,20 @@
 import './SavedNews.css';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { cards } from '../../utils/constants';
 
 function SavedNews({ isFullCardList, onViewSearched, onSignOut }) {
-  const [isLocationMain, setIsLocationMain] = useState(false);
+  const isLocationMain = false;
   useEffect(() => {
     onViewSearched();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <main className='saved-news__wrapper'>
+    <section className='saved-news__wrapper'>
       <Navigation islocationMain={isLocationMain} onSignOut={onSignOut} />
       <section className='saved-news'>
         <SavedNewsHeader cards={cards} />
@@ -27,7 +28,7 @@ function SavedNews({ isFullCardList, onViewSearched, onSignOut }) {
         />
       </section>
       <Footer />
-    </main>
+    </section>
   );
 }
 

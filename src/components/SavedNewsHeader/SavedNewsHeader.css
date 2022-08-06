@@ -18,7 +18,7 @@
   margin: 0 0 30px 0;
   padding: 0;
   max-width: 530px;
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto-slab', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -29,6 +29,8 @@
   display: flex;
 }
 .saved-news__keywords {
+  margin: 0;
+  padding: 0;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;

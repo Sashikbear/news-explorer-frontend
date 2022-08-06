@@ -16,7 +16,7 @@ function Main({
   onViewSearched,
   onSignOut,
 }) {
-  const [isLocationMain, setIsLocationMain] = useState(true);
+  const isLocationMain = true;
   const [isSearching, setIsSearching] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
@@ -45,10 +45,10 @@ function Main({
           onSignUpClick={onSignUpClick}
           onSignOut={onSignOut}
         />
-        <main className='main'>
+        <section className='main'>
           <Header />
           <SearchForm onSearchSubmit={handleSearchSubmit} />
-        </main>
+        </section>
       </div>
       {isSearching && <Preloader />}
       {isNotFound && <NotFound />}

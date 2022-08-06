@@ -1,5 +1,5 @@
 .about {
-  margin: 80px 104px 0 104px;
+  margin: 80px 104px;
   display: flex;
 }
 .about__image {
@@ -13,15 +13,17 @@
 }
 .about__text-wrapper {
   max-width: 600px;
-  padding-left: 56px;
+  padding: 51px 0 0 56px;
 }
 .about__title {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto-slab', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
   line-height: 1.15;
   color: #1a1b22;
+  padding: 0;
+  margin: 0 0 24px 0;
 }
 .about__text {
   font-family: 'Roboto', sans-serif;
@@ -30,10 +32,12 @@
   font-size: 18px;
   line-height: 1.33;
   color: #1a1b22;
+  padding: 0;
+  margin: 0 0 24px 0;
 }
 @media screen and (max-width: 920px) {
   .about {
-    margin: 0 40px;
+    margin: 40px 40px 61px 40px;
     align-items: center;
   }
   .about__image {
@@ -44,11 +48,18 @@
     font-weight: 400;
     font-size: 30px;
     line-height: 1.33;
+    margin: 0 0 16px 0;
+  }
+  .about__text {
+    margin: 0 0 16px 0;
+  }
+  .about__text-wrapper {
+    padding: 0 0 0 32px;
   }
 }
 @media screen and (max-width: 635px) {
   .about {
-    margin: 32px 16px 0 16px;
+    margin: 32px 16px 120px 16px;
     display: flex;
     flex-direction: column;
   }
@@ -58,6 +69,6 @@
   }
   .about__text-wrapper {
     width: 100%;
-    padding-left: 0;
+    padding: 0;
   }
 }
