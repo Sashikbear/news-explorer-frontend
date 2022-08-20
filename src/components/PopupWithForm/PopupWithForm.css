@@ -1,0 +1,111 @@
+.popup {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+.popup__container {
+  position: relative;
+  align-self: center;
+  margin: 0;
+  padding: 34px 36px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  max-width: 430px;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+}
+.popup__form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.popup__form-title {
+  margin: 0;
+  padding: 0 0 22px 0;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1a1b22;
+}
+
+.popup_opened {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+.popup__button {
+  margin: 30px 0 16px 0;
+  padding: 20px 114px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 358px;
+  box-sizing: border-box;
+  background: #e6e8eb;
+  color: rgba(0, 0, 0, 0.2);
+  cursor: default;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+}
+.popup__button_enabled {
+  cursor: pointer;
+  background: #2f71e5;
+  color: white;
+}
+.popup__button_enabled:hover {
+  background: #347eff;
+}
+.popup__button_enabled:active {
+  background: #2a65cc;
+}
+.button_type_close {
+  border: none;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 40px;
+  height: 40px;
+  align-self: flex-end;
+  background: url('../../images/close.svg') no-repeat center;
+}
+@media screen and (max-width: 530px) {
+  .popup__container {
+    width: 100%;
+  }
+  .popup__button {
+    max-width: 100%;
+    padding: 20px;
+  }
+  .popup__input {
+    width: 100%;
+  }
+  .button_type_close {
+    border: none;
+    position: absolute;
+    top: -21px;
+    right: 40px;
+  }
+  .popup__form {
+    width: 100%;
+  }
+}

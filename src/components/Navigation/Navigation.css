@@ -1,0 +1,218 @@
+.navbar {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.navbar__wrapper {
+  padding: 30px 104px 0 104px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(196, 196, 196, 0.1);
+}
+.navbar__wrapper_color_grey {
+  border-bottom: 1px solid rgba(8, 29, 45, 0.3);
+}
+.navbar__logo {
+  font-family: 'Roboto-slab', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+.navbar__logo_color_black {
+  color: #1a1b22;
+}
+.navbar__links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar__link {
+  padding-bottom: 26px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #ffffff;
+  margin-left: 42px;
+}
+.navbar__link_type_saved {
+  padding: 0 17px;
+}
+.navbar__link_color_black {
+  color: #1a1b22;
+}
+.navbar__link:hover {
+  border-bottom: 3px solid #ffffff;
+}
+.navbar__link:active {
+  border-bottom: 3px solid #ffffff;
+}
+.navbar__link_color_black:hover {
+  border-bottom: 3px solid #1a1b22;
+}
+.navbar__link_color_black:active {
+  border-bottom: 3px solid #1a1b22;
+}
+.navbar__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 176px;
+  background: none;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  cursor: default;
+  padding: 12px;
+  margin: -12px 0 0 0;
+}
+.navbar__button_color_black {
+  border: 1px solid #1a1b22;
+  color: #1a1b22;
+}
+.navbar__button_signedin {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 100px;
+}
+.navbar__icon {
+  width: 17.41px;
+  height: 16px;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+  cursor: pointer;
+}
+.navbar__button_signedin-white {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.navbar__icon_color_black {
+  background-image: url('../../images/logout-black.svg');
+}
+.navbar__icon_color_white {
+  background-image: url('../../images/logout-white.svg');
+}
+.navbar__hamburger {
+  display: none;
+}
+.navbar__link-hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 920px) {
+  .navbar__wrapper {
+    padding: 18px 40px 0 40px;
+  }
+  .navbar__link {
+    padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 16px;
+  }
+  .navbar__button_signedin {
+    margin-top: -8px;
+    padding: 8px;
+    max-width: 100px;
+  }
+  .navbar__button {
+    margin-top: -8px;
+    padding: 8px;
+    max-width: 152px;
+  }
+  .navbar__wrapper {
+    padding: 14px 40px 0 40px;
+  }
+}
+@media screen and (max-width: 635px) {
+  .navbar {
+    position: relative;
+  }
+  .navbar__wrapper {
+    position: relative;
+    padding: 16px;
+    z-index: 1;
+  }
+  .navbar__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #1a1b22;
+    z-index: 0;
+  }
+  .navbar__link {
+    display: none;
+  }
+  .navbar__hamburger {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+  .navbar__hamburger_color_white {
+    background-image: url('../../images/hamburger-menu.svg');
+  }
+  .navbar__hamburger_color_white-close {
+    background-image: url('../../images/menu-hamburger-close.svg');
+  }
+  .navbar__hamburger_color_black {
+    background-image: url('../../images/menu-hamburger-black.svg');
+  }
+  .navbar__hamburger_color_black-close {
+    background-image: url('../../images/menu-hamburger-close-black.svg');
+  }
+  .navbar__links {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  .navbar__link-hamburger {
+    display: block;
+    padding-bottom: 26px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 3.11;
+    color: #ffffff;
+    padding: 16px;
+  }
+
+  .navbar__link-hamburger:hover {
+    border-bottom: 3px solid #ffffff;
+  }
+  .navbar__link-hamburger:active {
+    border-bottom: 3px solid #ffffff;
+  }
+  .navbar__link-hamburger_color_black:hover {
+    border-bottom: 3px solid #1a1b22;
+  }
+  .navbar__link-hamburger_color_black:active {
+    border-bottom: 3px solid #1a1b22;
+  }
+  .navbar__logo {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .navbar__button {
+    max-width: 100%;
+    padding: 0;
+  }
+  .navbar {
+    position: absolute;
+  }
+}
