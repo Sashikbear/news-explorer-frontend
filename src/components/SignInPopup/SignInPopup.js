@@ -18,7 +18,7 @@ function SignInPopup({
     onSubmit(e);
     if (isErrorFree) {
       setIsButtonEnabled(true);
-      onSignInSubmit();
+      onSignInSubmit(values.email, values.password);
     }
   };
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);

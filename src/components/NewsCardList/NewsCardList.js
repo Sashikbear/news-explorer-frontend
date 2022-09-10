@@ -1,18 +1,45 @@
 import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-function NewsCardList({ cards, isFullCardList, iconPhrase, isLocationMain }) {
-  const slicedCards = cards.slice(0, 3);
-  const remainedCards = cards.slice(2, cards.length - 1);
-  const [isShowMore, setIsShowMore] = useState(false);
-  function handleShowMoreClick() {
-    setIsShowMore(true);
-  }
-  function handleShowLessClick() {
-    setIsShowMore(false);
-  }
+function NewsCardList({
+  cards,
+  iconPhrase,
+  isLocationMain,
+  loggedIn,
+  onSave,
+  onDelete,
+  onSignInClick,
+  savedArticles,
+  keyword,
+}) {
+  const [displaySets, setDisplaySets] = useState(0);
+  const [displayCards, setDisplayCards] = useState([]);
 
+  const handleShowMoreCards = () => {
+    const nextThree = getDisplayCards(cards, displaySets + 1);
+    setDisplayCards(nextThree);
+    setDisplaySets(displaySets + 1);
+  };
+
+  const getDisplayCards = useCallback((cardArray, count = 1, size = 3) => {
+    const lastIndex = count * size - 1;
+    const cardsToDisplay = cardArray.slice(0, lastIndex + 1).map((card) => {
+      return {
+        ...card,
+      };
+    });
+    return cardsToDisplay;
+  }, []);
+
+  useEffect(() => {
+    setDisplaySets(0);
+    setDisplayCards([]);
+    if (cards?.length !== 0) {
+      setDisplayCards(getDisplayCards(cards));
+      setDisplaySets(1);
+    }
+  }, [cards, getDisplayCards]);
   return (
     <section className='news-card-list'>
       {isLocationMain && (
@@ -20,63 +47,32 @@ function NewsCardList({ cards, isFullCardList, iconPhrase, isLocationMain }) {
           <h2 className='news-card-list__title'>Search results </h2>
         </div>
       )}
-      {isFullCardList && (
+      <div className='news-card-list__wrapper'>
         <ul className='news-card-list__grid'>
-          {cards.map((card) => (
-            <NewsCard
-              key={card._id}
-              card={card}
-              iconPhrase={iconPhrase}
-              isLocationMain={isLocationMain}
-            />
-          ))}
-        </ul>
-      )}
-
-      {!isFullCardList && (
-        <div className='news-card-list__wrapper'>
-          <ul className='news-card-list__grid'>
-            {slicedCards.map((card) => (
+          {displayCards.map((card) => {
+            card.keyword = keyword;
+            return (
               <NewsCard
-                key={card._id}
+                key={card.publishedAt}
                 card={card}
                 iconPhrase={iconPhrase}
                 isLocationMain={isLocationMain}
+                loggedIn={loggedIn}
+                onSave={onSave}
+                onDelete={onDelete}
+                onSignInClick={onSignInClick}
               />
-            ))}
-          </ul>
-          {!isShowMore && (
-            <div className='news-card__button-wrapper'>
-              <div className='news-card__button' onClick={handleShowMoreClick}>
-                Show more
-              </div>
+            );
+          })}
+        </ul>
+        {displayCards.length < cards.length && (
+          <div className='news-card__button-wrapper'>
+            <div className='news-card__button' onClick={handleShowMoreCards}>
+              Show more
             </div>
-          )}
-          {isShowMore && (
-            <>
-              {' '}
-              <ul className='news-card-list__grid'>
-                {remainedCards.map((card) => (
-                  <NewsCard
-                    key={card._id}
-                    card={card}
-                    isLocationMain={isLocationMain}
-                    iconPhrase={iconPhrase}
-                  />
-                ))}
-              </ul>
-              <div className='news-card__button-wrapper'>
-                <div
-                  className='news-card__button'
-                  onClick={handleShowLessClick}
-                >
-                  Show less
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

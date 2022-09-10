@@ -1,22 +1,45 @@
 import './SearchForm.css';
-
+import * as validate from '../../utils/validateForm';
+import useForm from '../../utils/useForm';
+import { useEffect } from 'react';
 function SearchForm({ onSearchSubmit }) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSearchSubmit();
-  }
+  const { handleChange, onSubmit, values, errors, isErrorFree } = useForm(
+    validate.validateSearch
+  );
+  const handleSubmit = (e) => {
+    onSubmit(e);
+    if (values.search) {
+      onSearchSubmit(values.search);
+    }
+  };
+
+  useEffect(() => {
+    values.search = '';
+  }, []);
+
   return (
     <form className='search-form' onSubmit={handleSubmit}>
-      <input
-        className='search-form__input'
-        type='search'
-        id='search'
-        name='search'
-        placeholder='Enter topic'
-      ></input>
-      <button className='search-form__button' onClick={handleSubmit}>
-        Search
-      </button>
+      <div className='search-form__wrapper'>
+        <input
+          className='search-form__input'
+          type='search'
+          id='search'
+          name='search'
+          placeholder='Enter topic'
+          onChange={handleChange}
+          value={values.search}
+        ></input>
+        <button className='search-form__button' onClick={handleSubmit}>
+          Search
+        </button>
+      </div>
+      <span
+        className={`search-form__error ${
+          errors.search && 'search-form__error_visible'
+        }`}
+      >
+        {errors.search}
+      </span>
     </form>
   );
 }

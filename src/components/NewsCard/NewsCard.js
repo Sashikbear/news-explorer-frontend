@@ -2,29 +2,46 @@ import './NewsCard.css';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-const NewsCard = ({ card, iconPhrase, isLocationMain }) => {
+import { dateConverter } from '../../utils/dateConverter';
+const NewsCard = ({
+  card,
+  iconPhrase,
+  isLocationMain,
+  loggedIn,
+  onSave,
+  onDelete,
+  onSignInClick,
+}) => {
   const currentUser = useContext(CurrentUserContext);
   const [isloggedInandClicked, setIsLoggedInandClicked] = useState(false);
-  function handleBookmarkClick() {
-    if (currentUser.isLoggedIn) {
+
+  const handleBookmarkClick = () => {
+    if (loggedIn) {
       setIsLoggedInandClicked(true);
+      if (!isLocationMain) {
+        onDelete(card._id);
+      } else {
+        onSave(card);
+        console.log(card);
+      }
     } else {
+      onSignInClick();
       setIsLoggedInandClicked(false);
     }
-  }
+  };
 
   return (
-    <li key={card._id} className='news-card'>
+    <li key={card.publishedAt} className='news-card'>
       <div className='news-card__image-container'>
         <div
           className='news-card__image'
-          style={{ backgroundImage: `url(${card.src})` }}
+          style={{ backgroundImage: `url(${card.urlToImage})` }}
         ></div>
         {!isLocationMain && (
           <div className='news-card__keyword'>{card.keyword}</div>
         )}
         <div className='news-card__icon-wrapper'>
-          {!currentUser.isLoggedIn && isLocationMain && (
+          {!loggedIn && isLocationMain && (
             <div className='news-card__icon-popup'>{iconPhrase}</div>
           )}
           {!isLocationMain && (
@@ -48,14 +65,14 @@ const NewsCard = ({ card, iconPhrase, isLocationMain }) => {
       </div>
       <div className='news-card__info-wrapper'>
         <div className='news-card__info'>
-          <h2 className='news-card__date'>{card.date}</h2>
-          <h3 className='news-card__header'>{card.header}</h3>
-          <blockquote className='news-card__text' cite={card.source}>
-            {card.text}
+          <h2 className='news-card__date'>{dateConverter(card.publishedAt)}</h2>
+          <h3 className='news-card__header'>{card.title}</h3>
+          <blockquote className='news-card__text' cite={card.author}>
+            {card.content}
           </blockquote>
         </div>
-        <a className='news-card__link' href={card.link}>
-          {card.source}
+        <a className='news-card__link' href={card.url}>
+          {card.source.name}
         </a>
       </div>
     </li>

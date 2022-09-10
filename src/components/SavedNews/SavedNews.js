@@ -3,29 +3,50 @@ import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import { useEffect } from 'react';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
-import NewsCardList from '../NewsCardList/NewsCardList';
-import { cards } from '../../utils/constants';
+import NewsCard from '../NewsCard/NewsCard';
 
-function SavedNews({ isFullCardList, onViewSearched, onSignOut }) {
+function SavedNews({
+  onSignOut,
+  savedArticles,
+  onDelete,
+  loggedIn,
+  currentName,
+  onSave,
+  onSignInClick,
+}) {
   const isLocationMain = false;
-  useEffect(() => {
-    onViewSearched();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <section className='saved-news__wrapper'>
-      <Navigation islocationMain={isLocationMain} onSignOut={onSignOut} />
+      <Navigation
+        islocationMain={isLocationMain}
+        onSignOut={onSignOut}
+        loggedIn={loggedIn}
+        currentName={currentName}
+      />
       <section className='saved-news'>
-        <SavedNewsHeader cards={cards} />
+        <SavedNewsHeader
+          savedArticles={savedArticles}
+          currentName={currentName}
+        />
       </section>
       <section className='saved-news__articles'>
-        <NewsCardList
-          cards={cards}
-          isFullCardList={isFullCardList}
-          iconPhrase='Remove from saved'
-          islocationMain={isLocationMain}
-        />
+        <ul className='saved-news__grid'>
+          {savedArticles.map((article) => {
+            return (
+              <NewsCard
+                card={article}
+                key={article._id}
+                onDelete={onDelete}
+                isLocationMain={isLocationMain}
+                iconPhrase={'Remove from saved'}
+                loggedIn={loggedIn}
+                onSave={onSave}
+                onSignInClick={onSignInClick}
+              />
+            );
+          })}
+        </ul>
       </section>
       <Footer />
     </section>
