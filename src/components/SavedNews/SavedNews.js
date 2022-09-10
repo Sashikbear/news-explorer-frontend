@@ -9,7 +9,6 @@ function SavedNews({
   savedArticles,
   onDelete,
   loggedIn,
-  currentName,
   onSave,
   onSignInClick,
 }) {
@@ -21,13 +20,9 @@ function SavedNews({
         islocationMain={isLocationMain}
         onSignOut={onSignOut}
         loggedIn={loggedIn}
-        currentName={currentName}
       />
       <section className='saved-news'>
-        <SavedNewsHeader
-          savedArticles={savedArticles}
-          currentName={currentName}
-        />
+        <SavedNewsHeader savedArticles={savedArticles} />
       </section>
       <section className='saved-news__articles'>
         <ul className='saved-news__grid'>

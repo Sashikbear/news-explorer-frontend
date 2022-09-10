@@ -99,7 +99,6 @@ function SignUpPopup({
         className={`popup__button ${
           isButtonEnabled && 'popup__button_enabled'
         }`}
-        onClick={handleSubmit}
       >
         {submitButton}
       </button>

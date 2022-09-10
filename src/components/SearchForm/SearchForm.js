@@ -30,9 +30,7 @@ function SearchForm({ onSearchSubmit }) {
           onChange={handleChange}
           value={values.search}
         ></input>
-        <button className='search-form__button' onClick={handleSubmit}>
-          Search
-        </button>
+        <button className='search-form__button'>Search</button>
       </div>
       <span
         className={`search-form__error ${

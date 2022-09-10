@@ -9,12 +9,14 @@ function About({ props }) {
       <div className='about__text-wrapper'>
         <h2 className='about__title'>About the author</h2>
         <p className='about__text'>
-          This block describes the project author. Here you should indicate your
-          name, what you do, and which development technologies you know.
+          Hey, I'm Alexandra Gritsenko, a fullstack web developer with
+          experience in building web pages and web applications. My stack MERN -
+          based (MongoDB, ExpressJS, React, Node), with many additional cool
+          things I'm passionately learning at the moment.
         </p>
         <p className='about__text'>
-          You can also talk about your experience with Practicum, what you
-          learned there, and how you can help potential customers.
+          I'm looking forward to future collaborations, hit me up using the
+          links below.
         </p>
         <p className='about__text'></p>
       </div>

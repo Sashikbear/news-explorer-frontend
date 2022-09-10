@@ -20,8 +20,7 @@ import {
 } from '../../utils/MainApi';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
-  const [currentName, setCurrentName] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
   const [isSignInPopupOpen, setSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);
@@ -57,7 +56,8 @@ function App() {
       checkToken(token)
         .then((res) => {
           console.log('Username set, ', res.name);
-          setCurrentName(res.name);
+          setCurrentUser(res.name);
+          console.log(currentUser);
           setLoggedIn(true);
         })
         .catch((err) => console.log(`Error: ${err}`));
@@ -67,28 +67,30 @@ function App() {
   useEffect(() => {
     loggedIn &&
       getUserData()
-        .then((res) => setCurrentUser(res))
+        .then((res) => setCurrentUser(res.name))
         .catch((err) => console.log(`Error: ${err}`));
   }, [loggedIn]);
 
   function handleSearchSubmit(search) {
     setIsSearching(true);
-    newsProxyApi.getNews(search).then((cards) => {
-      if (!cards.articles || cards.articles.length === 0) {
-        setIsNotFound(true);
-        setIsSearched(false);
-        setIsSearching(false);
-      } else {
-        setCards(cards.articles);
-        localStorage.setItem('searchResults', JSON.stringify(cards.articles));
-        setKeyword(search);
-        localStorage.setItem('keyword', search);
-        console.log(keyword);
-        setIsSearched(true);
-        setIsSearching(false);
-        setIsNotFound(false);
-      }
-    });
+    newsProxyApi
+      .getNews(search)
+      .then((cards) => {
+        if (!cards.articles || cards.articles.length === 0) {
+          setIsNotFound(true);
+          setIsSearched(false);
+          setIsSearching(false);
+        } else {
+          setCards(cards.articles);
+          localStorage.setItem('searchResults', JSON.stringify(cards.articles));
+          setKeyword(search);
+          localStorage.setItem('keyword', search);
+          setIsSearched(true);
+          setIsSearching(false);
+          setIsNotFound(false);
+        }
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }
 
   const getArticles = useCallback(() => {
@@ -185,7 +187,7 @@ function App() {
   function handleSignOutSubmit() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    setCurrentUser({});
+    setCurrentUser('');
     navigate('/', { replace: true });
   }
   useEffect(() => {
@@ -221,7 +223,6 @@ function App() {
                 onSignInClick={handleSignInClick}
                 onClose={closeAllPopups}
                 onSignOut={handleSignOutSubmit}
-                currentName={currentName}
                 onSave={handleSaveArticle}
                 savedArticles={savedArticles}
                 isSearched={isSearched}
@@ -240,7 +241,6 @@ function App() {
                 <SavedNews
                   loggedIn={loggedIn}
                   onSignOut={handleSignOutSubmit}
-                  currentName={currentName}
                   savedArticles={savedArticles}
                   onDelete={handleDeleteArticle}
                   onSave={handleSaveArticle}

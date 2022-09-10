@@ -1,6 +1,7 @@
 import './SavedNewsHeader.css';
-
-const SavedNewsHeader = ({ savedArticles, currentName }) => {
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+const SavedNewsHeader = ({ savedArticles }) => {
   const keywordArray = savedArticles.map((article) => article.keyword);
   let modeMap = {};
 
@@ -15,12 +16,12 @@ const SavedNewsHeader = ({ savedArticles, currentName }) => {
   const sortedElements = sortedArray.map((el) => `${el[0]}`);
   const commaSeparatedElements = sortedElements.join(',');
   const twoWords = sortedElements.slice(0, 2).join(', ');
-
+  const currentUser = useContext(CurrentUserContext);
   return (
     <header className='saved-news__header'>
       <h1 className='saved-news__articles-header'>Saved articles</h1>
       <h2 className='saved-news__message'>
-        {currentName}, you have {savedArticles.length} saved articles
+        {currentUser}, you have {savedArticles.length} saved articles
       </h2>
       <div className='saved-news__keywords-wrapper'>
         <p className='saved-news__keywords'>

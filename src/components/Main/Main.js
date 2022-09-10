@@ -12,7 +12,6 @@ function Main({
   onSignUpClick,
   onSignOut,
   loggedIn,
-  currentName,
   savedArticles,
   onSave,
   isSearching,
@@ -33,7 +32,6 @@ function Main({
           onSignUpClick={onSignUpClick}
           onSignOut={onSignOut}
           loggedIn={loggedIn}
-          currentName={currentName}
         />
         <section className='main'>
           <Header />

@@ -1,15 +1,18 @@
 import './Navigation.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
+import { useState, useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function Navigation({
   islocationMain,
   onSignInClick,
   onSignOut,
-  currentName,
+
   loggedIn,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const [isHamburgerMenuClicked, setIsHamburgerMenuClicked] = useState(false);
+
   function handleHamburgerMenuClick() {
     if (isHamburgerMenuClicked) {
       setIsHamburgerMenuClicked(false);
@@ -127,7 +130,7 @@ function Navigation({
                         : 'navbar__button_color_black'
                     }`}
                   >
-                    <span>{currentName || 'Alex'}</span>
+                    <span>{currentUser || 'Alex'}</span>
                     <div
                       onClick={onSignOut}
                       className={`navbar__icon ${
@@ -235,7 +238,7 @@ function Navigation({
                         : 'navbar__button_color_black'
                     }`}
                   >
-                    <span>{currentName || 'Alex'}</span>
+                    <span>{currentUser || 'Alex'}</span>
                     <div
                       onClick={onSignOut}
                       className={`navbar__icon ${
