@@ -1,7 +1,5 @@
 import './NewsCard.css';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { dateConverter } from '../../utils/dateConverter';
 const NewsCard = ({
   card,
@@ -12,7 +10,6 @@ const NewsCard = ({
   onDelete,
   onSignInClick,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
   const [isloggedInandClicked, setIsLoggedInandClicked] = useState(false);
 
   const handleBookmarkClick = () => {

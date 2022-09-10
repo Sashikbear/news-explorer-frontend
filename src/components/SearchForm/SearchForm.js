@@ -3,7 +3,7 @@ import * as validate from '../../utils/validateForm';
 import useForm from '../../utils/useForm';
 import { useEffect } from 'react';
 function SearchForm({ onSearchSubmit }) {
-  const { handleChange, onSubmit, values, errors, isErrorFree } = useForm(
+  const { handleChange, onSubmit, values, errors } = useForm(
     validate.validateSearch
   );
   const handleSubmit = (e) => {
@@ -15,6 +15,7 @@ function SearchForm({ onSearchSubmit }) {
 
   useEffect(() => {
     values.search = '';
+    // eslint-disable-next-line
   }, []);
 
   return (

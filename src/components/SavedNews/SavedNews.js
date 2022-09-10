@@ -1,7 +1,6 @@
 import './SavedNews.css';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
-import { useEffect } from 'react';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCard from '../NewsCard/NewsCard';
 

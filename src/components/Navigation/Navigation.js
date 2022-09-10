@@ -1,8 +1,7 @@
 import './Navigation.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 function Navigation({
   islocationMain,
   onSignInClick,
@@ -10,7 +9,6 @@ function Navigation({
   currentName,
   loggedIn,
 }) {
-  const currentUser = useContext(CurrentUserContext);
   const [isHamburgerMenuClicked, setIsHamburgerMenuClicked] = useState(false);
   function handleHamburgerMenuClick() {
     if (isHamburgerMenuClicked) {

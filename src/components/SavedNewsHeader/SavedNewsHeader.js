@@ -1,9 +1,6 @@
 import './SavedNewsHeader.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useContext } from 'react';
 
 const SavedNewsHeader = ({ savedArticles, currentName }) => {
-  const currentUser = useContext(CurrentUserContext);
   const keywordArray = savedArticles.map((article) => article.keyword);
   let modeMap = {};
 

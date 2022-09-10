@@ -8,7 +8,7 @@ import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import PopupConfirm from '../PopupConfirm/PopupConfirm';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { newsApi, newsProxyApi } from '../../utils/NewsApi';
+import { newsProxyApi } from '../../utils/NewsApi';
 import {
   register,
   login,
@@ -73,7 +73,7 @@ function App() {
 
   function handleSearchSubmit(search) {
     setIsSearching(true);
-    newsApi.getNews(search).then((cards) => {
+    newsProxyApi.getNews(search).then((cards) => {
       if (!cards.articles || cards.articles.length === 0) {
         setIsNotFound(true);
         setIsSearched(false);
