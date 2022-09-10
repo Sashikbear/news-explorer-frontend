@@ -23,3 +23,8 @@ export const newsApi = new NewsApi(
   'https://newsapi.org/v2/everything',
   '26b83ad25fb749fab2eaf148a5b3bcc7'
 );
+
+export const newsProxyApi = new NewsApi(
+  'https://nomoreparties.co/news/v2/everything',
+  '26b83ad25fb749fab2eaf148a5b3bcc7'
+);

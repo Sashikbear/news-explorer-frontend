@@ -8,7 +8,7 @@ import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import PopupConfirm from '../PopupConfirm/PopupConfirm';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { newsApi } from '../../utils/NewsApi';
+import { newsApi, newsProxyApi } from '../../utils/NewsApi';
 import {
   register,
   login,
