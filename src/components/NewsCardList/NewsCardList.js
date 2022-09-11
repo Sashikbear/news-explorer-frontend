@@ -61,6 +61,7 @@ function NewsCardList({
                 onSave={onSave}
                 onDelete={onDelete}
                 onSignInClick={onSignInClick}
+                savedArticles={savedArticles}
               />
             );
           })}

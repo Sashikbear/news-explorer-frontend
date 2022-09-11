@@ -8,7 +8,7 @@ import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import PopupConfirm from '../PopupConfirm/PopupConfirm';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { newsProxyApi } from '../../utils/NewsApi';
+import { newsApi } from '../../utils/NewsApi';
 import {
   register,
   login,
@@ -30,6 +30,7 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
+
   const [cards, setCards] = useState(
     JSON.parse(localStorage.getItem('searchResults'))
   );
@@ -73,7 +74,7 @@ function App() {
 
   function handleSearchSubmit(search) {
     setIsSearching(true);
-    newsProxyApi
+    newsApi
       .getNews(search)
       .then((cards) => {
         if (!cards.articles || cards.articles.length === 0) {

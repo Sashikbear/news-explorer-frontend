@@ -37,6 +37,7 @@ function SavedNews({
                 loggedIn={loggedIn}
                 onSave={onSave}
                 onSignInClick={onSignInClick}
+                savedArticles={savedArticles}
               />
             );
           })}

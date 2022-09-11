@@ -9,9 +9,12 @@ const NewsCard = ({
   onSave,
   onDelete,
   onSignInClick,
+  savedArticles,
 }) => {
   const [isloggedInandClicked, setIsLoggedInandClicked] = useState(false);
-
+  const isSaved = savedArticles.some(
+    (savedArticle) => savedArticle.url === card.url
+  );
   const handleBookmarkClick = () => {
     if (loggedIn) {
       setIsLoggedInandClicked(true);
@@ -20,6 +23,9 @@ const NewsCard = ({
       } else {
         onSave(card);
         console.log(card);
+      }
+      if (isSaved) {
+        setIsLoggedInandClicked(false);
       }
     } else {
       onSignInClick();
@@ -54,6 +60,8 @@ const NewsCard = ({
                 isloggedInandClicked && isLocationMain
                   ? 'news-card__icon_color_blue'
                   : ''
+              } ${
+                isSaved && isLocationMain ? 'news-card__icon_color_blue' : ''
               }`}
               onClick={handleBookmarkClick}
             ></div>
