@@ -18,8 +18,7 @@ function SignUpPopup({
     onSubmit(e);
     if (isErrorFree) {
       setIsButtonEnabled(true);
-      console.log(values.username);
-      onSignUpSubmit(values.username);
+      onSignUpSubmit(values.email, values.password, values.name);
     }
   };
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
@@ -29,6 +28,8 @@ function SignUpPopup({
     errors.email = '';
     values.password = '';
     errors.password = '';
+    values.name = '';
+    errors.name = '';
     // eslint-disable-next-line
   }, [isOpen]);
 
@@ -77,30 +78,27 @@ function SignUpPopup({
       >
         {errors.password}
       </span>
-      <label htmlFor='username-input' className='popup__input-label'>
+      <label htmlFor='name-input' className='popup__input-label'>
         Username
       </label>
       <input
-        id='username-input'
-        type='username'
-        name='username'
-        className='popup__input popup__input_type_username'
-        placeholder='Enter username'
+        id='name-input'
+        type='text'
+        name='name'
+        className='popup__input popup__input_type_name'
+        placeholder='Enter Username'
         onChange={handleChange}
-        value={values.username}
+        value={values.name}
         required
       />
-      <span
-        className={`popup__error ${errors.username && 'popup__error_visible'}`}
-      >
-        {errors.username}
+      <span className={`popup__error ${errors.name && 'popup__error_visible'}`}>
+        {errors.name}
       </span>
       <button
         type='submit'
         className={`popup__button ${
           isButtonEnabled && 'popup__button_enabled'
         }`}
-        onClick={handleSubmit}
       >
         {submitButton}
       </button>

@@ -27,11 +27,20 @@ export function validateSignUpInfo(values) {
     errors.password = 'Password is required. Please fill in this field.';
   } else if (values.password.length < 8) {
     errors.password = 'Please lengthen your password to 8 characters or more.';
-  } else if (!values.username) {
-    errors.username = 'Username is required. Please fill in this field.';
-  } else if (values.username.length < 2) {
-    errors.username = 'Please lengthen your username to 2 characters or more.';
+  } else if (!values.name) {
+    errors.name = 'Username is required. Please fill in this field.';
+  } else if (values.name.length < 2) {
+    errors.name = 'Please lengthen your username to 2 characters or more.';
   }
 
+  return errors;
+}
+
+export function validateSearch(values) {
+  let errors = {};
+
+  if (!values.search) {
+    errors.search = 'Please enter a keyword.';
+  }
   return errors;
 }

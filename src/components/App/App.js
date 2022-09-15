@@ -1,30 +1,41 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import PopupConfirm from '../PopupConfirm/PopupConfirm';
-import { useNavigate } from 'react-router-dom';
-
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { newsApi } from '../../utils/NewsApi';
+import {
+  register,
+  login,
+  checkToken,
+  getUserData,
+  saveArticle,
+  deleteArticle,
+  getSavedArticles,
+} from '../../utils/MainApi';
 function App() {
-  const [currentUser, setCurrentUser] = useState({
-    username: '',
-    isLoggedIn: false,
-  });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
   const [isSignInPopupOpen, setSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);
-  const [isFullCardList, setIFullCardList] = useState();
+  const [keyword, setKeyword] = useState(localStorage.getItem('keyword'));
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  const [isSearching, setIsSearching] = useState(false);
+  const [isSearched, setIsSearched] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
+
+  const [cards, setCards] = useState(
+    JSON.parse(localStorage.getItem('searchResults'))
+  );
+
   const navigate = useNavigate();
-  function handleFullCardList() {
-    setIFullCardList(true);
-  }
-  function handleHalfCardList() {
-    setIFullCardList(false);
-  }
 
   function handleSignInClick() {
     setSignUpPopupOpen(false);
@@ -40,17 +51,144 @@ function App() {
     setSignUpPopupOpen(false);
     setConfirmPopupOpen(false);
   }
-  function handelSignUpSubmit(username) {
-    setCurrentUser({ username: username, isLoggedIn: false });
-    setSignUpPopupOpen(false);
-    setConfirmPopupOpen(true);
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      checkToken(token)
+        .then((res) => {
+          console.log('Username set, ', res.name);
+          setCurrentUser(res.name);
+          console.log(currentUser);
+          setLoggedIn(true);
+        })
+        .catch((err) => console.log(`Error: ${err}`));
+    }
+  }, []);
+
+  useEffect(() => {
+    loggedIn &&
+      getUserData()
+        .then((res) => setCurrentUser(res.name))
+        .catch((err) => console.log(`Error: ${err}`));
+  }, [loggedIn]);
+
+  function handleSearchSubmit(search) {
+    setIsSearching(true);
+    newsApi
+      .getNews(search)
+      .then((cards) => {
+        if (!cards.articles || cards.articles.length === 0) {
+          setIsNotFound(true);
+          setIsSearched(false);
+          setIsSearching(false);
+        } else {
+          setCards(cards.articles);
+          localStorage.setItem('searchResults', JSON.stringify(cards.articles));
+          setKeyword(search);
+          localStorage.setItem('keyword', search);
+          setIsSearched(true);
+          setIsSearching(false);
+          setIsNotFound(false);
+        }
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }
-  function handelSignInSubmit(username) {
-    setCurrentUser({ username: username, isLoggedIn: true });
-    setSignInPopupOpen(false);
-  }
-  function handelSignOutSubmit() {
-    setCurrentUser({ username: '', isLoggedIn: false });
+
+  const getArticles = useCallback(() => {
+    loggedIn &&
+      getSavedArticles()
+        .then((articlesList) => {
+          setSavedArticles(
+            articlesList.map((article) => {
+              return {
+                _id: article._id,
+                keyword: article.keyword,
+                title: article.title,
+                content: article.text,
+                publishedAt: article.date,
+                source: { name: article.source },
+                url: article.link,
+                urlToImage: article.image,
+                owner: article.owner,
+              };
+            })
+          );
+        })
+        .catch((err) => console.log(`Error: ${err}`));
+  }, [loggedIn]);
+
+  useEffect(() => {
+    getArticles();
+  }, [getArticles]);
+
+  const handleSaveArticle = (article) => {
+    const isSavedAlready = savedArticles.find(
+      (savedArticle) => savedArticle.url === article.url
+    );
+    if (isSavedAlready) {
+      deleteArticle(isSavedAlready._id)
+        .then(() => getArticles())
+        .catch((err) => console.log(`Error${err}`));
+    } else {
+      saveArticle({
+        keyword: article.keyword,
+        title: article.title,
+        text: article.content,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+      })
+        .then(() => getArticles())
+        .catch((err) => console.log(`Error${err}`));
+    }
+  };
+
+  const handleDeleteArticle = (articleId) => {
+    deleteArticle(articleId)
+      .then(() => {
+        setSavedArticles((articles) =>
+          articles.filter((article) => article._id !== articleId)
+        );
+      })
+      .catch((err) => console.log(`Error${err}`));
+  };
+
+  const handleSignUpSubmit = (email, password, username) => {
+    if (!email || !password || !username) {
+      throw new Error('Something went wrong with the email or password! ');
+    }
+    register(email, password, username)
+      .then(() => {
+        closeAllPopups();
+        setConfirmPopupOpen(true);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  };
+  const handleSignInSubmit = (email, password) => {
+    if (!email || !password) {
+      throw new Error('Something went wrong with the email or password! ');
+    }
+    login(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+          setLoggedIn(true);
+          closeAllPopups();
+          return data;
+        }
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  };
+
+  function handleSignOutSubmit() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    setCurrentUser('');
     navigate('/', { replace: true });
   }
   useEffect(() => {
@@ -82,24 +220,37 @@ function App() {
             path='/'
             element={
               <Main
+                loggedIn={loggedIn}
                 onSignInClick={handleSignInClick}
                 onClose={closeAllPopups}
-                isFullCardList={isFullCardList}
-                onViewSearched={handleHalfCardList}
-                onSignOut={handelSignOutSubmit}
+                onSignOut={handleSignOutSubmit}
+                onSave={handleSaveArticle}
+                savedArticles={savedArticles}
+                isSearched={isSearched}
+                isSearching={isSearching}
+                isNotFound={isNotFound}
+                cards={cards}
+                onSearch={handleSearchSubmit}
+                keyword={keyword}
               />
             }
           />
           <Route
             path='saved-news'
             element={
-              <SavedNews
-                isFullCardList={isFullCardList}
-                onViewSearched={handleFullCardList}
-                onSignOut={handelSignOutSubmit}
-              />
+              <ProtectedRoute redirectPath='/' loggedIn={loggedIn}>
+                <SavedNews
+                  loggedIn={loggedIn}
+                  onSignOut={handleSignOutSubmit}
+                  savedArticles={savedArticles}
+                  onDelete={handleDeleteArticle}
+                  onSave={handleSaveArticle}
+                  onSignInClick={handleSignInClick}
+                />
+              </ProtectedRoute>
             }
           />
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
         <SignInPopup
           isOpen={isSignInPopupOpen}
@@ -107,7 +258,7 @@ function App() {
           onClose={closeAllPopups}
           alternative='Sign up'
           submitButton='Sign in'
-          onSignInSubmit={handelSignInSubmit}
+          onSignInSubmit={handleSignInSubmit}
         />
         <SignUpPopup
           isOpen={isSignUpPopupOpen}
@@ -115,7 +266,7 @@ function App() {
           alternative='Sign in'
           submitButton='Sign up'
           onSignInClick={handleSignInClick}
-          onSignUpSubmit={handelSignUpSubmit}
+          onSignUpSubmit={handleSignUpSubmit}
         />
         <PopupConfirm
           isOpen={isConfirmPopupOpen}

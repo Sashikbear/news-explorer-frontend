@@ -1,11 +1,18 @@
 import './Navigation.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
+function Navigation({
+  islocationMain,
+  onSignInClick,
+  onSignOut,
+
+  loggedIn,
+}) {
   const currentUser = useContext(CurrentUserContext);
+
   const [isHamburgerMenuClicked, setIsHamburgerMenuClicked] = useState(false);
+
   function handleHamburgerMenuClick() {
     if (isHamburgerMenuClicked) {
       setIsHamburgerMenuClicked(false);
@@ -54,7 +61,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                 </Link>
               )}
             </li>
-            {!currentUser.isLoggedIn && (
+            {!loggedIn && (
               <>
                 {' '}
                 <li
@@ -87,7 +94,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
               </>
             )}
 
-            {currentUser.isLoggedIn && (
+            {loggedIn && (
               <>
                 <li
                   className={`navbar__link navbar__link_type_saved  ${
@@ -123,7 +130,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                         : 'navbar__button_color_black'
                     }`}
                   >
-                    <span>{username || 'Alex'}</span>
+                    <span>{currentUser || 'Alex'}</span>
                     <div
                       onClick={onSignOut}
                       className={`navbar__icon ${
@@ -180,7 +187,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                 </Link>
               )}
             </li>
-            {!currentUser.isLoggedIn && (
+            {!loggedIn && (
               <>
                 {' '}
                 <li
@@ -195,7 +202,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
               </>
             )}
 
-            {currentUser.isLoggedIn && (
+            {loggedIn && (
               <>
                 <li
                   className={`navbar__link-hamburger  ${
@@ -231,7 +238,7 @@ function Navigation({ islocationMain, onSignInClick, onSignOut, username }) {
                         : 'navbar__button_color_black'
                     }`}
                   >
-                    <span>{username || 'Alex'}</span>
+                    <span>{currentUser || 'Alex'}</span>
                     <div
                       onClick={onSignOut}
                       className={`navbar__icon ${
